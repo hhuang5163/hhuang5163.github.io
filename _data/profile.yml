@@ -1,22 +1,22 @@
-primary_name: "Your Name"
+primary_name: "Harrison Huang"
 secondary_name: ""
-navbar_name: "Your Name"
+navbar_name: "Harrison Huang"
 
 positions:
-- logo: /assets/images/badges/MIT_Social_circle.png  # Logo is optional
-  name: Position 1 with logo
-- name: Position 2 without logo
+- logo: /assets/images/badges/rice_logo.png  # Logo is optional
+  name: M.S. Student at Rice University
+# - name: Position 2 without logo
 
 
-email: "your@email.com"
-# cv_link: link-to-your-cv-file
-gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
-github: your_github_id
-twitter: your_twitter_id  # Do not include the '@' symbol
+email: "hhuang@rice.edu"
+cv_link: /assets/Harrison_Huang_CV.pdf
+# gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
+github: hhuang5163
+# twitter: your_twitter_id  # Do not include the '@' symbol
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
 #   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
-# linkedin: your-linked-in-id
+linkedin: hhuang5163
 # orcid: 0000-0000-0000-0000
 
 short_bio_text_justify: false
@@ -30,32 +30,59 @@ short_bio: >-
     as well as being common in domestic longhair and domestic shorthair cats.
   </p>
 
-portrait_url: /assets/images/photos/portrait.jpg
-portrait_caption: >-
-  Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
+portrait_url: /assets/images/photos/Headshot.jpg
+# portrait_caption: >-
+#   Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
 
 education:
-- name: Massachusetts Institute of Technology
-  logo: /assets/images/badges/MIT_Social_circle.png
+- name: Rice University
+  logo: /assets/images/badges/rice_logo.png
   position: >- 
-    Department of Electrical Engineering and Computer Science <br/>
-    Ph.D. Student
-  date: Sep. 2024 - present
-- name: Peking University
-  logo: /assets/images/badges/PKU_red.png
-  position: B.S. in Computer Science
-  date: Sep. 2019 - Jul. 2021
+    Department of Computer Science <br/>
+    Master's Student
+  date: Jan 2024 - Present
+- name: Rice University
+  logo: /assets/images/badges/rice_logo.png
+  position: >- 
+    Department of Computer Science <br/>
+    B.S. in Computer Science <br/>
+    Minor in Mathematics
+  date: Aug 2020 - May 2024
 
-# experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
+experience:
+- name: Rice University
+  logo: /assets/images/badges/rice_logo.png
+  position: Human-Centered AI and Robotics Lab Researcher
+  date: Apr 2022 - Present
+- name: Rice University
+  logo: /assets/images/badges/rice_logo.png
+  position: Graduate Student Handbook Revision Lead
+  date: Aug 2023 - Present
+- name: Delta Air Lines
+  logo: /assets/images/badges/delta_logo.jfif
+  position: Artificial Intelligence Engineer Intern
+  date: Jun 2024 - Aug 2024
+- name: Rice University
+  logo: /assets/images/badges/rice_logo.png
+  position: Computer Science Teaching Assistant
+  date: Aug 2021 - May 2024
+- name: Rice University
+  logo: /assets/images/badges/rice_logo.png
+  position: Jones College Webmaster
+  date: Mar 2022 - Dec 2023
 
 awards:
-- name: Award Name 2
-  date: 2024
-- name: Award Name 1 
-  date: 2021
-- name: A quick brown fox jumps over the lazy dog and runs away award
-  date: 2021
+- name: IEEE Computer Society North America Student Challenge Finalist
+  date: Nov 2024
+- name: AIES 2024 Student Travel Award
+  date: Oct 2024
+- name: Rice Engineering Alumni (REA) Graduate Student Travel Grant
+  date: Oct 2024
+- name: Rice University MS Fellowship Award
+  date: Jan 2024
+- name: President's Honor Roll
+  date: Dec 2023
+- name: Segal AmeriCorps Education Award
+  date: Aug 2021
+- name: Chinese Professional Club Scholarship
+  date: Feb 2020
