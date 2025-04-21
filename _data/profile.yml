@@ -73,9 +73,11 @@ experience:
 
 awards:
 - name: 2025 NSF GRFP Honorable Mention
-  date: April 2025
-- name: IEEE Computer Society North America Student Challenge Finalist
-  date: Nov 2024
+  date: Apr 2025
+- name: 2nd Place, IEEE Computer Society North America Student Challenge
+  date: Dec 2024
+# - name: IEEE Computer Society North America Student Challenge Finalist
+#   date: Nov 2024
 - name: AIES 2024 Student Travel Award
   date: Oct 2024
 - name: Rice Engineering Alumni (REA) Graduate Student Travel Grant
