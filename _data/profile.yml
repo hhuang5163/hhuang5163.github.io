@@ -4,7 +4,7 @@ navbar_name: "Harrison Huang"
 
 positions:
 - logo: /assets/images/badges/rice_logo.png  # Logo is optional
-  name: M.S. Student at Rice University
+  name: Incoming PhD Student at Rice University
 # - name: Position 2 without logo
 
 
@@ -22,6 +22,8 @@ linkedin: hhuang5163
 short_bio_text_justify: false
 short_bio: >-
   <p>
+  I specialize in human-centered artificial intelligence, focusing on AI transparency and improving human-robot collaboration. 
+  Currently, I’m a researcher in a Human-Centered AI and Robotics Lab, where I explore how AI can help people better understand and work alongside intelligent systems. I aim to design AI that both supports people in their tasks and makes working with technology more intuitive and effective.
   </p>
 
 portrait_url: /assets/images/photos/Headshot.jpg
@@ -34,7 +36,7 @@ education:
   position: >- 
     Department of Computer Science <br/>
     Incoming Ph.D. Student, Fall 2025
-  date: August 2025 - 
+  date: Aug 2025 - 
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
   position: >- 
@@ -47,7 +49,7 @@ education:
     Department of Computer Science <br/>
     B.S. in Computer Science <br/>
     Minor in Mathematics
-  date: Aug 2020 - May 2024
+  date: Aug 2020 - Dec 2023
 
 experience:
 - name: Rice University
