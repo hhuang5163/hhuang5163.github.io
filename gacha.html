@@ -1,0 +1,125 @@
+---
+layout: default
+title: Gacha
+navbar_title: Gacha
+---
+
+<div class="container py-5 text-center">
+  <!-- <h1 class="mb-4">Gachapon Machine</h1> -->
+
+    <div class="d-flex justify-content-center">
+        <div id="gacha-wrapper" class="position-relative" style="width: 300px;">
+            <img id="machine-img"
+                src="/assets/images/gacha/gachapon_machine_no_knob.png"
+                alt="Gachapon Machine"
+                class="img-fluid w-100 h-100">
+
+            <div id="capsule-container"
+                class="position-absolute">
+                <img src="/assets/images/gacha/capsule1.png" class="capsule position-absolute" style="left: 0%; top: 80%;">
+                <img src="/assets/images/gacha/capsule1.png" class="capsule position-absolute" style="left: 50%; top: 80%;">
+                <img src="/assets/images/gacha/capsule1.png" class="capsule position-absolute" style="left: 70%; top: 80%;">
+            </div>
+
+            <img id="knob-img"
+                src="/assets/images/gacha/gachapon_knob.png"
+                alt="Knob"
+                class="position-absolute knob-img">
+        </div>
+    </div>
+
+  <div class="mt-4">
+    <button id="roll-btn" class="btn btn-primary">Roll!</button>
+  </div>
+
+  <div id="capsule" class="d-none">
+    <img src="/assets/images/gacha/capsule1.png" alt="Capsule" class="img-fluid mb-3" style="max-width:100px;">
+    <div id="fact" class="alert alert-info" role="alert"></div>
+  </div>
+</div>
+
+<style>
+  #gacha-wrapper {
+    max-width: 300px;
+  }
+
+  #capsule-container {
+    width: 60%;
+    height: 28%;
+    top: 75px;
+    left: 20%;
+    z-index: 2;
+    /* border: 2px dashed red;  */
+    pointer-events: none; 
+  }
+
+  .knob-img {
+    width: 89px;
+    height: 89px;
+    bottom: 117.5px;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .spin {
+    animation: knob-spin 0.4s ease-in-out;
+  }
+
+  @keyframes knob-spin {
+    0%   { transform: translateX(-50%) rotate(0deg); }
+    50%  { transform: translateX(-50%) rotate(45deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+  }
+
+  .capsule {
+    width: 30px;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .capsule.jump {
+    animation: jump 0.4s ease;
+  }
+
+  @keyframes jump {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+  }
+</style>
+
+<script>
+  const facts = {{ site.data.funfacts | jsonify }};
+  
+  function rollCapsule() {
+    // Animate knob
+    const knob = document.getElementById('knob-img');
+    knob.classList.add('spin');
+    setTimeout(() => knob.classList.remove('spin'), 400);
+
+    // Animate capsule bounce
+    const capsules = document.querySelectorAll('.capsule');
+    capsules.forEach((capsule) => {
+      capsule.classList.add('jump');
+      setTimeout(() => capsule.classList.remove('jump'), 400);
+    });
+
+    // Show fact capsule
+    document.getElementById('capsule').classList.add('d-none');
+    setTimeout(() => {
+      const randomFact = facts[Math.floor(Math.random() * facts.length)];
+      document.getElementById('fact').innerHTML = `
+        <strong>${randomFact.fact}</strong><br>
+        <small>${randomFact.subtext}</small>
+      `;
+
+    //   <img src="${randomFact.image}" alt="related image" style="max-height: 100px; margin-top: 10px;">
+      document.getElementById('capsule').classList.remove('d-none');
+    }, 500);
+  };
+
+  document.getElementById('roll-btn').onclick = rollCapsule;
+  document.getElementById('knob-img').onclick = rollCapsule;
+</script>
