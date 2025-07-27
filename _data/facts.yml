@@ -22,3 +22,32 @@
   fact: "I have ran 5 half marathons."
   subtext: "I'm currently training for a full marathon!"
   image: "assets/images/discover/facts/half-marathon.png"
+
+- category: "Honors & Awards"
+  fact: "I was awarded the 2025 NSF GRFP Honorable Mention."
+  subtext: ""
+  image: ""
+
+- category: "Research"
+  fact: "My research is focused on Human-Centered AI and Robotics."
+  subtext: "I am particularly interested in how AI can be used to enhance human capabilities and improve user experiences. 
+            More specifically, my work is in explainable AI, a collection of approaches that aim to make black-box AI systems more transparent to their users.
+            Explainable AI approaches have been shown to be effective in helping users understand robot behavior."
+  image: "assets/images/discover/facts/xai.png"
+
+- category: "Research"
+  fact: "Policy summarization is a subfield of explainable AI that focuses on generating concise summaries of complex robot policies."
+  subtext: "Policy summarization aims to provide users with selected summaries of complex robot policies to enhance their understanding and trust in AI systems.
+            My research in this area involves developing methods to incorporate personalization into policy summarization to select examples of robot behavior that are tailored to each user.
+            These explanations can help users understand how robots will behave in specific situations, thereby improving their trust and collaboration with AI systems, especially in critical scenarios."
+  image: "assets/images/discover/facts/policy_summarization.png"
+
+- category: "Research"
+  fact: "My research, PPS: Personalized Policy Summarization, has been published at the AAAI/ACM Conference on AI, Ethics, and Society (AIES) 2024."
+  subtext: "Policy summarization methods aim to showcase key examples of agent behaviors to their human users. 
+            Yet, existing methods produce “one-size-fits-all” summaries for a generic audience ahead of time. 
+            Personalized Policy Summarization (PPS). PPS discerns a user’s mental model of the 
+            agent through a series of algorithmically generated questions and crafts customized policy summaries to enhance user understanding. 
+            Unlike existing methods, PPS actively engages with users to gauge their comprehension of the agent behavior, subsequently generating tailored explanations on the fly. 
+            Through a combination of numerical and human subject experiments, we confirmed the utility of this personalized approach to explainable AI."
+  image: "assets/images/discover/facts/pps.png"

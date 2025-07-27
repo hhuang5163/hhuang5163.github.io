@@ -4,7 +4,7 @@ navbar_name: "Harrison Huang"
 
 positions:
 - logo: /assets/images/badges/rice_logo.png  # Logo is optional
-  name: Incoming PhD Student at Rice University
+  name: PhD Student at Rice University
 # - name: Position 2 without logo
 
 
@@ -35,8 +35,8 @@ education:
   logo: /assets/images/badges/rice_logo.png
   position: >- 
     Department of Computer Science <br/>
-    Incoming Ph.D. Student, Fall 2025
-  date: Aug 2025 - 
+    Ph.D. Student, Fall 2025
+  date: July 2025 - Present
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
   position: >- 
