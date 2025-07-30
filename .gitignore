@@ -7,4 +7,7 @@ _site/
 vendor/
 Gemfile.lock
 
+# Ignore extras folder
+extras/
+
 .DS_Store
