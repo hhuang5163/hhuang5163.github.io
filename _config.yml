@@ -14,11 +14,27 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://hhuang5163.github.io" # used for absolute URLs in OG meta tags and the RSS feed
+
+# Privacy-friendly analytics. Sign up free at https://www.goatcounter.com, pick a
+# site code (e.g. "hhuang"), and put it here to enable. Empty = disabled.
+goatcounter_code: ""
 
 # Build settings
 markdown: kramdown
 plugins:
   - jekyll-email-protect
+
+# Notes/blog posts (in _posts/) live under /notes/... instead of the Jekyll default.
+permalink: /notes/:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: note
+      navbar_title: Notes
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -39,3 +55,4 @@ collections:
   - publications
   - news
   - showcase
+  - projects

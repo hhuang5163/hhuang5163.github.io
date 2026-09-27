@@ -22,6 +22,9 @@
                 <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
                 {% endif %}
                 {% endfor %}
+                {% if item.bibtex %}
+                <a href="javascript:void(0)" class="bibtex-copy" data-bibtex="{{ item.bibtex | escape }}" title="Copy BibTeX to clipboard">[BibTeX]</a>
+                {% endif %}
             </p>
 
         </div>
@@ -29,7 +32,7 @@
 </div>
 
 <div class="row no-gutters d-md-none {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray {% if include.first %}rounded-top{% endif %} {% if include.last %}rounded-bottom{% endif %} {% if item.cover %}lazy{% endif %}" data-src="{{ item.cover | relative_url }}">
-    <div class="w-100" style="background-color: rgba(255,255,255,0.9);">
+    <div class="w-100 pub-overlay">
         <div class="d-flex align-items-start flex-column py-3 px-4">
             <div class="mb-auto"></div>
             <div>

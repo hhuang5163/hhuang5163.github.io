@@ -1,0 +1,19 @@
+{% assign projects = include.projects %}
+<div class="my-3 p-0 bg-white shadow-sm rounded-sm">
+    <h6 class="border-bottom border-gray p-3 mb-0">
+        {% if include.title %}{{ include.title }}{% else %}<i class="fas fa-diagram-project"></i> Selected Projects{% endif %}
+        <a href="{{ 'publications' | relative_url }}">(view all <i class="fas fa-angle-double-right"></i>)</a>
+    </h6>
+    <div class="p-3">
+        <div class="row">
+            {% for item in projects limit:include.limit %}
+            <div class="col-md-6 mb-3 mb-md-0">
+                {% include widgets/project_card.html item=item %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h6 class="d-block p-3 mt-0 text-right">
+        <a href="{{ 'publications' | relative_url }}">All projects <i class="fas fa-angle-double-right"></i></a>
+    </h6>
+</div>

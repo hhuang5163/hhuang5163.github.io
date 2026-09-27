@@ -1,8 +1,14 @@
 homepage:
+  show_discover_teaser: true
+  show_highlights: true
   show_experience: true
   show_news: true
+  # Projects live at /publications (navbar + Discover cross-links); showing them here
+  # too duplicated the publications section, so the homepage keeps pubs instead.
+  show_selected_projects: false
   show_selected_publications: true
-  num_news: 10
+  num_news: 5
+  num_projects: 4
 
 # Feel free to replace the footer text if you would like to, but I will greatly appreciate it 
 # if you keep the link to the template so that more people can benefit from it. Thanks!

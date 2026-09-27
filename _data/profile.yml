@@ -23,25 +23,30 @@ short_bio_text_justify: false
 short_bio: >-
   <p>
   I specialize in human-centered artificial intelligence, focusing on AI transparency and improving human-robot collaboration. 
-  Currently, I’m a researcher in a Human-Centered AI and Robotics Lab, where I explore how AI can help people better understand and work alongside intelligent systems. I aim to design AI that both supports people in their tasks and makes working with technology more intuitive and effective.
+  Currently, I’m a researcher in the Teaming Lab at Rice University, where I explore how AI can help people better understand and work alongside intelligent systems. I aim to design AI that both supports people in their tasks and makes working with technology more intuitive and effective.
   </p>
 
 portrait_url: /assets/images/photos/Headshot.jpg
 # portrait_caption: >-
 #   Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
 
+# Shown as a small line under the bio. Comment out to hide. Keep this current -
+# it's the cheapest way to make the homepage feel alive instead of a static CV mirror.
+currently: >-
+  <i class="fas fa-flask text-primary"></i> <strong>Currently:</strong> a PhD student in the Human-Centered AI and Robotics Lab, continuing my work on personalized, explainable robot behavior summaries.
+
 education:
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
   position: >- 
     Department of Computer Science <br/>
-    Ph.D. Student, Fall 2025
-  date: July 2025 - Present
+    Ph.D. in Computer Science
+  date: Aug 2025 - Present
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
   position: >- 
     Department of Computer Science <br/>
-    Master's Student
+    M.S. in Computer Science
   date: Jan 2024 - May 2025
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
@@ -58,7 +63,7 @@ experience:
   date: Apr 2022 - Present
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
-  position: Graduate Student Handbook Revision Lead
+  position: Lead Event Planner, CS Graduate Student Association
   date: Aug 2023 - Present
 - name: Delta Air Lines
   logo: /assets/images/badges/delta_logo.jfif
@@ -67,16 +72,18 @@ experience:
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
   position: Computer Science Teaching Assistant
-  date: Aug 2021 - May 2024
+  date: Aug 2021 - Present
 - name: Rice University
   logo: /assets/images/badges/rice_logo.png
   position: Jones College Webmaster
   date: Mar 2022 - Dec 2023
 
 awards:
+- name: IES Students and Young Professionals Paper Assistance Program (IES-SYPA)
+  date: Aug 2026
 - name: 2025 NSF GRFP Honorable Mention
   date: Apr 2025
-- name: 2nd Place, IEEE Computer Society North America Student Challenge
+- name: 2nd Place, IEEE Computer Society North America Student Challenge Competition
   date: Dec 2024
 # - name: IEEE Computer Society North America Student Challenge Finalist
 #   date: Nov 2024

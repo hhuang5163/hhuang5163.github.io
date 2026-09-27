@@ -9,6 +9,17 @@ navbar_title: Home
 
 {% include widgets/debug_url.html %}
 
+{% comment %}
+  Hidden for now: /discover is an unlisted page shared only by direct link.
+{% if site.data.display.homepage.show_discover_teaser %}
+    {% include widgets/discover_teaser.html %}
+{% endif %}
+
+{% if site.data.display.homepage.show_highlights %}
+    {% include widgets/highlights_card.html %}
+{% endif %}
+{% endcomment %}
+
 {% if site.data.display.homepage.show_experience %}
     {% include widgets/experience_card.html %}
 {% endif %}
@@ -17,6 +28,14 @@ navbar_title: Home
     {% assign count_news = site.news | size %}
     {% if count_news > 0 %}
         {% include widgets/news_card.html limit=site.data.display.homepage.num_news %}
+    {% endif %}
+{% endif %}
+
+{% if site.data.display.homepage.show_selected_projects %}
+    {% assign selected_projects = site.projects | sort: "date" | reverse | where: "selected", true %}
+    {% assign count_projects = selected_projects | size %}
+    {% if count_projects > 0 %}
+        {% include widgets/selected_projects_card.html projects=selected_projects limit=site.data.display.homepage.num_projects %}
     {% endif %}
 {% endif %}
 

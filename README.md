@@ -1,64 +1,93 @@
-# academic-homepage
+# hhuang.github.io
 
-![Preview](assets/images/etc/preview.png)
+Personal academic website of Harrison Huang, live at [hhuang5163.github.io](https://hhuang5163.github.io).
 
-[![pages-build-deployment](https://github.com/luost26/academic-homepage/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/luost26/academic-homepage/actions/workflows/pages/pages-build-deployment)
-[![W3C Validation](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fluost26.github.io%2Facademic-homepage)](https://validator.nu/?doc=https%3A%2F%2Fluost26.github.io%2Facademic-homepage)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fluost26%2Facademic-homepage&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-[![GitHub stars](https://img.shields.io/github/stars/luost26/academic-homepage)](https://github.com/luost26/academic-homepage)
-[![GitHub forks](https://img.shields.io/github/forks/luost26/academic-homepage)](https://github.com/luost26/academic-homepage/forks)
+Built with Jekyll, based on the [academic-homepage](https://github.com/luost26/academic-homepage) template — now heavily customized (see changelog below).
 
-A GitHub Pages (Jekyll) template for personal academic website. Click [here](https://luost.me/academic-homepage/) to see the demo.
+## Structure
 
-## User Community
+| Path | Purpose |
+| --- | --- |
+| `_data/profile.yml` | Name, bio, "Currently" line, education, experience, awards |
+| `_data/highlights.yml` | Homepage highlights strip (short, quantified wins) |
+| `_data/facts.yml` | Discover-page gachapon facts (supports `link`/`link_text` cross-links) |
+| `_data/navigation.yml` | Navbar pages |
+| `_data/display.yml` | Homepage section toggles |
+| `_projects/` | Paper cards with abstracts, shown on the Publications page (`publications.html`, at `/publications`; `/projects` redirects there) |
+| `_posts/` | Notes/blog posts, rendered at `/notes` (create as `YYYY-MM-DD-title.md`) |
+| `_publications/` | Publications collection (homepage Selected Publications; the old year-by-year list in `publications-old.html` is unpublished) |
+| `_news/` | News items |
+| `_data/talks.yml` | Talks & posters (shown on the Publications page) |
+| `discover.html` | Gachapon fun-fact page with capsule collection book |
+| `feed.xml` | RSS feed for Notes |
+| `sitemap.xml` | Search-engine sitemap |
 
-[:star:](https://luost.me/)
-[:star:](https://cch1999.github.io/)
-[:star:](https://kyrrego.github.io/)
-[:star:](https://ced3-han.github.io/)
-[:star:](https://lihengchen.com/)
-[:star:](https://hpwang-whu.github.io/)
-[:star:](https://zhang-yingyi.github.io/)
-[:star:](https://wby24.github.io/)
-[:star:](https://pengfeixu.com/)
-[:star:](https://boqiuphd.github.io/)
-[:star:](https://www.huabing.li/)
-[:star:](https://xiecuiying.github.io/)
-[:star:](https://hannyang.github.io/)
-[:star:](https://king-play.github.io/)
+## Running locally
 
-:hugs: Feel free to tell us if you are using this template for your website by creating an issue [here](https://github.com/luost26/academic-homepage/issues/new?assignees=&labels=&projects=&template=user-report.md&title=I+am+using+this+template%21).
+```bash
+bundle install
+bundle exec jekyll serve
+```
 
+Then browse to the displayed URL (default `http://127.0.0.1:4000`).
 
-## Need Help?
+## TODO / ideas
 
-If you run into **any** issues while using this template, or have suggestions for improvements, please don't hesitate to create an issue [here](https://github.com/luost26/academic-homepage/issues/new).
+- **Interactive gridworld demo** — a small in-browser RL agent walking a gridworld with a
+  "summarize this policy" button, as a live demonstration of policy summarization for
+  non-expert visitors. The most portfolio-worthy addition, but a real project — build it
+  as a standalone JS page (no backend needed) when there's time.
+- Fill in `_data/talks.yml` with any missing invited talks/posters and slide/poster PDFs.
+- Enable analytics: sign up at [goatcounter.com](https://www.goatcounter.com) and set
+  `goatcounter_code` in `_config.yml`.
 
+## Changelog
 
-## Getting Started
+### 2026-07-19 (later) — Polish, collection book, and academic extras
 
-1. First, fork this repository or click the "Use this template" button to create a new repository. The name of the repository should be `<your-github-username>.github.io` (click [here](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites) to learn more about naming a GitHub Pages repository).
-   - If you plan to customize the functionality or style of the template, and do not want to get updates from this repository, choose "Use this template".
-   - If you plan to only edit the content (biography, publications, news, etc.), and would like to get updates from this repository, choose "Fork".
-   - If you want to contribute to this project, fork the repository and submit a pull request.
+**Publications**
+- Copy-BibTeX button on publication items (add a `bibtex:` block to a publication's
+  front matter to enable). PPS entry seeded with the official BibTeX from AAAI (verified
+  DOI, volume, pages).
+- New "Talks & Posters" section at the bottom of the Publications page, driven by
+  `_data/talks.yml`.
 
-### Running Locally (Debug & Preview)
+**Homepage trim**
+- Selected Projects removed from the homepage (kept at `/projects`); Selected
+  Publications stays. News trimmed from 10 to 5 items.
 
-2. Follow the **step 1** and **step 2** of the instruction [here](https://jekyllrb.com/docs/) to install prerequisites and jekyll.
+**Discover / gacha**
+- Capsule collection book: rolled facts fill in a Pokédex-style grid ("Collected X/9"),
+  persisted in `localStorage`, with a reset link.
+- Rare capsules: every roll has a 5% chance of being golden — special modal styling,
+  confetti burst, and a permanent shiny marker in the collection book.
 
-3. Clone your forked repository to your local machine.
+**Site-wide**
+- Konami code easter egg (↑↑↓↓←→←→BA): capsule rain on any page (`assets/js/konami.js`).
+- `sitemap.xml` (hand-rolled, excludes 404/feeds/template extras).
+- GoatCounter analytics hook, disabled until `goatcounter_code` is set in `_config.yml`.
 
-4. Run the following command in the root directory of the repository:
+### 2026-07-19 — De-templating and new pages
 
-   ```bash
-   bundle exec jekyll serve
-   ```
+**Homepage**
+- Added a Discover teaser card linking to the gachapon page.
+- Added a "Currently" line under the bio (`currently:` in `_data/profile.yml`).
+- Added a highlights strip of quantified wins (`_data/highlights.yml`).
+- Portrait is now circular with a gradient accent bar (was a square thumbnail).
+- Added a "Selected Projects" section (projects with `selected: true`).
 
-5. Browse to the displayed URL to see the website.
+**New pages**
+- `/projects` — new `_projects` collection with problem → approach → outcome cards, tag badges, and client-side tag filtering. Seeded with PPS (AIES 2024) and the MS thesis.
+- `/notes` — blog powered by Jekyll's native `_posts`, with pretty permalinks (`/notes/YYYY/MM/DD/title/`), a card-style post layout (`_layouts/note.html`), and an RSS feed at `/feed.xml`.
+- `404.html` — gachapon-themed 404 with a runaway capsule animation.
 
-### Deploying to GitHub Pages
+**Discover page**
+- Facts now draw from a shuffle bag (every fact appears once before any repeat; deck persists in `sessionStorage`) instead of uniform `Math.random()`, which allowed streaky repeats.
+- Facts support `link`/`link_text` fields; research facts now cross-link to `/projects` and the AIES paper.
+- Removed dead commented-out code.
 
-2. Go to the repository settings and enable GitHub Pages. Detailed instructions can be found [here](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site).
-
-3. Navigate to your created website, and follow the instructions displayed on the homepage (if any) to finalize the setup.
-
+**Site-wide**
+- Open Graph / Twitter Card / canonical / description meta tags in `_layouts/default.html` (`url:` set in `_config.yml`).
+- RSS `<link>` in the page head.
+- Dark mode with a navbar toggle (remembers the choice; defaults to OS `prefers-color-scheme`). Styles in `assets/css/global.css`, toggle in `assets/js/common.js`.
+- Gemfile: added `logger`, `base64`, `bigdecimal` (needed by Jekyll 3.x on Ruby ≥ 3.4/4.0, where they left the default gems).

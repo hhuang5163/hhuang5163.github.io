@@ -1,0 +1,15 @@
+# Shown as a row of chips on the homepage (highlights_card.html). Keep this to
+# short, quantified, skimmable wins - this is the "5 second scan" for recruiters.
+- icon: fas fa-award
+  text: "2025 NSF GRFP Honorable Mention"
+
+- icon: fas fa-medal
+  text: "2nd Place, IEEE Computer Society North America Student Challenge"
+
+- icon: fas fa-file-alt
+  text: "MS Thesis defended, Apr 2025"
+  url: https://repository.rice.edu/items/a66cb4fd-e0b3-4714-acf0-220de658cbee
+
+- icon: fas fa-star
+  text: "PPS - AIES 2024 Spotlight paper"
+  url: https://ojs.aaai.org/index.php/AIES/article/view/31714

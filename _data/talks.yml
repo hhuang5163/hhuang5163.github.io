@@ -1,0 +1,32 @@
+# Talks, posters, and presentations - shown at the bottom of the Publications page.
+# Optional per-entry: `links:` map (Slides/Poster/Video/etc.), rendered like publication links.
+# Listed newest first.
+
+# TODO: add the talk title if you want one (CV only lists the venue).
+- title: "Rice University Ken Kennedy Institute Retreat"
+  type: "Presentation"
+  date: "Mar 2026"
+
+- title: "Personalized Explanations of Robot Behavior for Human Users"
+  venue: "Rice University"
+  type: "MS Thesis Defense"
+  date: "Apr 2025"
+  links:
+    Thesis: https://repository.rice.edu/items/a66cb4fd-e0b3-4714-acf0-220de658cbee
+
+- title: "PPS: Personalized Policy Summarization for Explaining Sequential Behavior of Autonomous Agents"
+  venue: "In-Space Physical AI Workshop, Ion Innovation District"
+  type: "Workshop Presentation"
+  date: "Nov 2024"
+
+- title: "PPS: Personalized Policy Summarization for Explaining Sequential Behavior of Autonomous Agents"
+  venue: "AAAI/ACM Conference on AI, Ethics, and Society (AIES)"
+  type: "Conference Presentation"
+  date: "Oct 2024"
+  # links:
+  #   Slides: /assets/slides/aies2024-pps.pdf
+
+# TODO: add the talk title if you want one (the news item calls it "AI Teacher work").
+- title: "Texas Regional Robotics Symposium (TEROS)"
+  type: "Presentation"
+  date: "Apr 2023"

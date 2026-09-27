@@ -1,32 +1,87 @@
 ---
 layout: default
-title : Publications
+title: Publications
 navbar_title: Publications
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
 ---
 
-{% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
+{% assign projects = site.projects | sort: "date" | reverse | where: "show", true %}
 
 <div class="row">
-    <div class="col-12 col-lg-10">
-        {% for year in pubs_by_year %}
-        {% assign num_papers = year.items | size %}
-        <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
-        <div class="my-0 p-0 bg-white shadow-sm rounded-sm">
-            {% for item in year.items %}
-                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
-            {% endfor %}
-        </div>
-        {% endfor %}
+    <div class="col">
+        <h1 class="pt-4 mb-3">Publications</h1>
     </div>
-
-    <div class="col-2 d-none d-lg-block">
-        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 80px">
-            {% for year in pubs_by_year %}
-            <a class="nav-link d-block" href="#year-{{ year.name }}">{{ year.name }}</a>
-            {% endfor %}
-        </div>
-    </div>
-
 </div>
+
+{% assign all_tags = "" | split: "" %}
+{% for item in projects %}
+    {% assign all_tags = all_tags | concat: item.tags %}
+{% endfor %}
+{% assign all_tags = all_tags | uniq | sort %}
+
+{% if all_tags.size > 1 %}
+<div class="row mb-3">
+    <div class="col">
+        <div id="project-filters">
+            <button class="btn btn-sm btn-primary mr-1 mb-1 project-filter-btn" data-tag="__all__">All</button>
+            {% for tag in all_tags %}
+            <button class="btn btn-sm btn-outline-primary mr-1 mb-1 project-filter-btn" data-tag="{{ tag }}">{{ tag }}</button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row" id="project-grid">
+    {% for item in projects %}
+    <div class="col-md-6 mb-4 project-grid-item" data-tags="{{ item.tags | join: '|' }}">
+        {% include widgets/project_card.html item=item %}
+    </div>
+    {% endfor %}
+</div>
+
+{% if site.data.talks and site.data.talks.size > 0 %}
+<div class="row">
+    <div class="col">
+        <h2 class="pt-2" id="talks">Talks &amp; Posters</h2>
+        <div class="my-0 p-0 bg-white shadow-sm rounded-sm">
+            {% for talk in site.data.talks %}
+            <div class="p-3 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
+                <div class="d-flex">
+                    <div>
+                        <div>{{ talk.title }}</div>
+                        <div class="small text-muted">{{ talk.type }}{% if talk.venue %} &middot; <i>{{ talk.venue }}</i>{% endif %}</div>
+                        {% if talk.links %}
+                        <div class="small">
+                            {% for link in talk.links %}
+                            <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="ml-auto mt-auto text-muted no-break small"><i>{{ talk.date }}</i></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+document.querySelectorAll('.project-filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        const tag = btn.dataset.tag;
+
+        document.querySelectorAll('.project-filter-btn').forEach(function (b) {
+            b.classList.toggle('btn-primary', b === btn);
+            b.classList.toggle('btn-outline-primary', b !== btn);
+        });
+
+        document.querySelectorAll('.project-grid-item').forEach(function (item) {
+            const tags = item.dataset.tags.split('|');
+            const show = tag === '__all__' || tags.indexOf(tag) !== -1;
+            item.classList.toggle('d-none', !show);
+        });
+    });
+});
+</script>

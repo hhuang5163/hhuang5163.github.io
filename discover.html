@@ -2,6 +2,8 @@
 layout: default
 title: Discover
 navbar_title: Discover
+sitemap: false
+noindex: true
 ---
 
 <div class="container py-5 text-center">
@@ -33,6 +35,20 @@ navbar_title: Discover
 
   <div class="mt-4">
     <button id="roll-btn" class="btn btn-primary">Roll!</button>
+  </div>
+
+  <div class="mt-5">
+    <h5>Capsule Collection <span id="collection-count" class="badge badge-pill badge-light border align-middle"></span></h5>
+    <p id="collection-complete" class="small text-success d-none">🎉 Collection complete — you know all my secrets!</p>
+    <div class="d-flex flex-wrap justify-content-center" id="collection-book">
+      {% for f in site.data.facts %}
+      <div class="book-slot m-2 text-center" data-index="{{ forloop.index0 }}">
+        <img src="/assets/images/discover/capsule1.png" alt="Capsule {{ forloop.index }}">
+        <div class="small text-muted book-slot-label">???</div>
+      </div>
+      {% endfor %}
+    </div>
+    <a href="javascript:void(0)" id="collection-reset" class="small text-muted">Reset collection</a>
   </div>
 
   {% include widgets/fact_modal.html %}
@@ -88,11 +104,150 @@ navbar_title: Discover
     50%  { transform: translateY(-15px); }
     100% { transform: translateY(0); }
   }
+
+  /* Collection book */
+  .book-slot {
+    width: 72px;
+  }
+
+  .book-slot img {
+    width: 40px;
+    filter: brightness(0);
+    opacity: 0.2;
+    transition: filter 0.4s ease, opacity 0.4s ease;
+  }
+
+  .book-slot.collected img {
+    filter: none;
+    opacity: 1;
+  }
+
+  .book-slot.shiny img {
+    filter: sepia(1) saturate(4) hue-rotate(-15deg) brightness(1.15) drop-shadow(0 0 6px rgba(212, 175, 55, 0.9));
+  }
+
+  .book-slot-label {
+    font-size: 0.7rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  /* Rare (golden) capsule */
+  #factModal .modal-content.golden {
+    border: 3px solid #d4af37;
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.6);
+  }
+
+  .confetti-container {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    pointer-events: none;
+    z-index: 2000;
+    overflow: hidden;
+  }
+
+  .confetti-piece {
+    position: absolute;
+    top: -3vh;
+    width: 8px;
+    height: 14px;
+    animation: confetti-fall linear forwards;
+  }
+
+  @keyframes confetti-fall {
+    to { transform: translateY(110vh) rotate(720deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .confetti-piece { animation: none; display: none; }
+  }
 </style>
 
 <script>
   const facts = {{ site.data.facts | jsonify }};
-  
+
+  // Shuffle-bag draw: every fact appears once before any repeats. Plain
+  // Math.random() picks felt streaky (~11% immediate-repeat chance with 9 facts).
+  const DECK_KEY = 'discover-deck';
+  const LAST_KEY = 'discover-last';
+
+  function shuffledIndices() {
+    const arr = facts.map((_, i) => i);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function drawFact() {
+    let deck = [];
+    try { deck = JSON.parse(sessionStorage.getItem(DECK_KEY)) || []; } catch (e) {}
+    deck = deck.filter((i) => Number.isInteger(i) && i >= 0 && i < facts.length);
+
+    if (deck.length === 0) {
+      deck = shuffledIndices();
+      // Avoid the new deck starting with the fact the user just saw.
+      const last = parseInt(sessionStorage.getItem(LAST_KEY), 10);
+      if (deck.length > 1 && deck[deck.length - 1] === last) {
+        [deck[0], deck[deck.length - 1]] = [deck[deck.length - 1], deck[0]];
+      }
+    }
+
+    const idx = deck.pop();
+    sessionStorage.setItem(DECK_KEY, JSON.stringify(deck));
+    sessionStorage.setItem(LAST_KEY, String(idx));
+    return idx;
+  }
+
+  // Collection book: collected/shiny fact indices persist in localStorage.
+  const COLLECT_KEY = 'discover-collected';
+  const SHINY_KEY = 'discover-shiny';
+  const RARE_CHANCE = 0.05;
+
+  function loadSet(key) {
+    try {
+      return new Set((JSON.parse(localStorage.getItem(key)) || [])
+        .filter((i) => Number.isInteger(i) && i >= 0 && i < facts.length));
+    } catch (e) { return new Set(); }
+  }
+
+  function saveSet(key, set) {
+    localStorage.setItem(key, JSON.stringify([...set]));
+  }
+
+  function updateBook() {
+    const collected = loadSet(COLLECT_KEY);
+    const shiny = loadSet(SHINY_KEY);
+    document.querySelectorAll('.book-slot').forEach((slot) => {
+      const i = parseInt(slot.dataset.index, 10);
+      slot.classList.toggle('collected', collected.has(i));
+      slot.classList.toggle('shiny', shiny.has(i));
+      slot.querySelector('.book-slot-label').textContent =
+        collected.has(i) ? (facts[i].category || 'Fun Fact') : '???';
+    });
+    document.getElementById('collection-count').textContent = collected.size + '/' + facts.length;
+    document.getElementById('collection-complete').classList.toggle('d-none', collected.size < facts.length);
+  }
+
+  function burstConfetti() {
+    const colors = ['#d4af37', '#f94144', '#f3722c', '#f9c74f', '#90be6d', '#577590'];
+    const container = document.createElement('div');
+    container.className = 'confetti-container';
+    document.body.appendChild(container);
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.background = colors[i % colors.length];
+      piece.style.animationDelay = (Math.random() * 0.7) + 's';
+      piece.style.animationDuration = (1.8 + Math.random() * 1.4) + 's';
+      container.appendChild(piece);
+    }
+    setTimeout(() => container.remove(), 4000);
+  }
+
   function rollCapsule() {
     // Animate knob
     const knob = document.getElementById('knob-img');
@@ -107,10 +262,26 @@ navbar_title: Discover
     });
 
     setTimeout(() => {
-      const randomFact = facts[Math.floor(Math.random() * facts.length)];
+      const idx = drawFact();
+      const randomFact = facts[idx];
+      const isRare = Math.random() < RARE_CHANCE;
+
+      // Record in the collection book
+      const collected = loadSet(COLLECT_KEY);
+      collected.add(idx);
+      saveSet(COLLECT_KEY, collected);
+      if (isRare) {
+        const shiny = loadSet(SHINY_KEY);
+        shiny.add(idx);
+        saveSet(SHINY_KEY, shiny);
+      }
+      updateBook();
 
       // Update modal title
-      document.getElementById('factModalLabel').innerText = randomFact.category || 'Fun Fact';
+      document.getElementById('factModalLabel').innerText =
+        (isRare ? '✨ Rare! ' : '') + (randomFact.category || 'Fun Fact');
+      document.querySelector('#factModal .modal-content').classList.toggle('golden', isRare);
+      if (isRare) burstConfetti();
 
       // Compose modal content
       let modalContent = `
@@ -122,46 +293,25 @@ navbar_title: Discover
         modalContent += `<img src="${randomFact.image}" alt="related image" class="img-fluid mt-2" style="max-height: 200px;">`;
       }
 
+      if (randomFact.link) {
+        modalContent += `<p class="mt-3 mb-0"><a href="${randomFact.link}" class="btn btn-sm btn-outline-primary">${randomFact.link_text || 'Learn more'} <i class="fas fa-angle-double-right"></i></a></p>`;
+      }
+
       document.getElementById('modal-fact-body').innerHTML = modalContent;
 
       const factModal = new bootstrap.Modal(document.getElementById('factModal'));
       factModal.show();
   }, 500);
-
-    // // Wait, then show modal
-    // setTimeout(() => {
-    //   const randomFact = facts[Math.floor(Math.random() * facts.length)];
-
-    //   let modalContent = `
-    //     <p><strong>${randomFact.fact}</strong></p>
-    //     <p><small>${randomFact.subtext}</small></p>
-    //   `;
-
-    //   if (randomFact.image) {
-    //     modalContent += `<img src="${randomFact.image}" alt="related image" class="img-fluid mt-2" style="max-height: 200px;">`;
-    //   }
-
-    //   document.getElementById('modal-fact-body').innerHTML = modalContent;
-
-    //   // Use Bootstrap’s modal API to show it
-    //   const factModal = new bootstrap.Modal(document.getElementById('factModal'));
-    //   factModal.show();
-    // }, 500);
-
-    // // Show fact capsule
-    // document.getElementById('capsule').classList.add('d-none');
-    // setTimeout(() => {
-    //   const randomFact = facts[Math.floor(Math.random() * facts.length)];
-    //   document.getElementById('fact').innerHTML = `
-    //     <strong>${randomFact.fact}</strong><br>
-    //     <small>${randomFact.subtext}</small>
-    //   `;
-
-    // //   <img src="${randomFact.image}" alt="related image" style="max-height: 100px; margin-top: 10px;">
-    //   document.getElementById('capsule').classList.remove('d-none');
-    // }, 500);
   };
 
   document.getElementById('roll-btn').onclick = rollCapsule;
   document.getElementById('knob-img').onclick = rollCapsule;
+
+  document.getElementById('collection-reset').onclick = function () {
+    localStorage.removeItem(COLLECT_KEY);
+    localStorage.removeItem(SHINY_KEY);
+    updateBook();
+  };
+
+  updateBook();
 </script>

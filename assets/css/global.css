@@ -59,6 +59,11 @@ div.lazy {
     min-height: 80px;
 }
 
+/* Translucent backdrop for publication text over the cover image (mobile) */
+.pub-overlay {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
 .badge-publication {
     font-size: 100%;
 }
@@ -67,3 +72,120 @@ div.lazy {
     font-family: Courier, monospace;
 }
 
+.profile-portrait {
+    object-fit: cover;
+}
+
+.profile-name-accent {
+    height: 4px;
+    width: 56px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #4e73df, #1cc88a);
+    margin: 0.5rem 0 0.75rem;
+}
+
+.discover-teaser {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.discover-teaser:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.discover-teaser-icon {
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+/* Dark mode: the theme is set on <html data-theme> by the inline script in
+   _layouts/default.html (saved choice, else OS preference) and toggled from
+   the navbar. Bootstrap 4's bg-* utilities use !important, so these
+   overrides must too. */
+html[data-theme="dark"] {
+    --dm-bg: #14161a;
+    --dm-surface: #1e2127;
+    --dm-border: #33373f;
+    --dm-text: #d8dadd;
+    --dm-text-muted: #9aa0a8;
+    --dm-link: #7ab3ff;
+}
+
+html[data-theme="dark"] body.bg-light {
+    background-color: var(--dm-bg) !important;
+    color: var(--dm-text);
+}
+
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .modal-content {
+    background-color: var(--dm-surface) !important;
+    color: var(--dm-text);
+}
+
+html[data-theme="dark"] .navbar.bg-light {
+    background-color: var(--dm-surface) !important;
+}
+
+html[data-theme="dark"] .navbar-light .navbar-brand,
+html[data-theme="dark"] .navbar-light .navbar-nav .nav-link,
+html[data-theme="dark"] .navbar-light .navbar-toggler {
+    color: var(--dm-text);
+}
+
+html[data-theme="dark"] .navbar-light .navbar-nav .nav-item.active .nav-link,
+html[data-theme="dark"] .navbar-light .navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .text-muted {
+    color: var(--dm-text-muted) !important;
+}
+
+html[data-theme="dark"] .text-dark,
+html[data-theme="dark"] .text-body {
+    color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] a {
+    color: var(--dm-link);
+}
+
+html[data-theme="dark"] .border-gray,
+html[data-theme="dark"] .border,
+html[data-theme="dark"] .border-top,
+html[data-theme="dark"] .border-bottom,
+html[data-theme="dark"] .modal-header,
+html[data-theme="dark"] .modal-footer {
+    border-color: var(--dm-border) !important;
+}
+
+html[data-theme="dark"] .badge-light {
+    background-color: #2a2e35;
+    color: var(--dm-text);
+}
+
+html[data-theme="dark"] .close {
+    color: var(--dm-text);
+    text-shadow: none;
+}
+
+html[data-theme="dark"] mark {
+    background-color: #4a4320;
+    color: var(--dm-text);
+}
+
+html[data-theme="dark"] .pub-overlay {
+    background-color: rgba(30, 33, 39, 0.9);
+}
+
+html[data-theme="dark"] .img-thumbnail {
+    background-color: var(--dm-surface);
+    border-color: var(--dm-border);
+}
+
+
+.theme-toggle {
+    background: none;
+    border: 0;
+    cursor: pointer;
+}

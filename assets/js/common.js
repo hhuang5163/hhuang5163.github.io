@@ -38,4 +38,46 @@ $(function () {
     $(".lazy").on("load", function () {
         $grid.masonry('layout');
     });
+
+    // Copy-BibTeX buttons on publication items
+    document.querySelectorAll('.bibtex-copy').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var text = btn.getAttribute('data-bibtex');
+            function done() {
+                var orig = btn.textContent;
+                btn.textContent = '[Copied!]';
+                setTimeout(function () { btn.textContent = orig; }, 1500);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done);
+            } else {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+                done();
+            }
+        });
+    });
+
+    // Light/dark toggle in the navbar (initial theme is set in the <head>)
+    var themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+        var root = document.documentElement;
+        function syncIcon() {
+            var dark = root.getAttribute('data-theme') === 'dark';
+            themeBtn.innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            themeBtn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+            themeBtn.setAttribute('title', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        syncIcon();
+        themeBtn.addEventListener('click', function () {
+            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            syncIcon();
+        });
+    }
 })

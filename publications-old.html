@@ -1,0 +1,60 @@
+---
+# Hidden (not deleted): the old year-by-year publications list. The Publications
+# page is now publications.html (project cards with abstracts). Set
+# `published: true` to build this page again.
+published: false
+layout: default
+title : Publications
+navbar_title: Publications
+body_attr: >-
+  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+---
+
+{% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
+
+<div class="row">
+    <div class="col-12 col-lg-10">
+        {% for year in pubs_by_year %}
+        {% assign num_papers = year.items | size %}
+        <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
+        <div class="my-0 p-0 bg-white shadow-sm rounded-sm">
+            {% for item in year.items %}
+                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        {% if site.data.talks and site.data.talks.size > 0 %}
+        <h2 class="pt-4" id="talks">Talks &amp; Posters</h2>
+        <div class="my-0 p-0 bg-white shadow-sm rounded-sm">
+            {% for talk in site.data.talks %}
+            <div class="p-3 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
+                <div class="d-flex">
+                    <div>
+                        <div>{{ talk.title }}</div>
+                        <div class="small text-muted">{{ talk.type }}{% if talk.venue %} &middot; <i>{{ talk.venue }}</i>{% endif %}</div>
+                        {% if talk.links %}
+                        <div class="small">
+                            {% for link in talk.links %}
+                            <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="ml-auto mt-auto text-muted no-break small"><i>{{ talk.date }}</i></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-2 d-none d-lg-block">
+        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 80px">
+            {% for year in pubs_by_year %}
+            <a class="nav-link d-block" href="#year-{{ year.name }}">{{ year.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>

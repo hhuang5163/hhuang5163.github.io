@@ -30,10 +30,12 @@
 
 - category: "Research"
   fact: "My research is focused on Human-Centered AI and Robotics."
-  subtext: "I am particularly interested in how AI can be used to enhance human capabilities and improve user experiences. 
+  subtext: "I am particularly interested in how AI can be used to enhance human capabilities and improve user experiences.
             More specifically, my work is in explainable AI, a collection of approaches that aim to make black-box AI systems more transparent to their users.
             Explainable AI approaches have been shown to be effective in helping users understand robot behavior."
   image: "assets/images/discover/facts/xai.png"
+  link: "/publications"
+  link_text: "See my publications"
 
 - category: "Research"
   fact: "Policy summarization is a subfield of explainable AI that focuses on generating concise summaries of complex robot policies."
@@ -41,6 +43,8 @@
             My research in this area involves developing methods to incorporate personalization into policy summarization to select examples of robot behavior that are tailored to each user.
             These explanations can help users understand how robots will behave in specific situations, thereby improving their trust and collaboration with AI systems, especially in critical scenarios."
   image: "assets/images/discover/facts/policy_summarization.png"
+  link: "/publications"
+  link_text: "Explore this research"
 
 - category: "Research"
   fact: "My research, PPS: Personalized Policy Summarization, has been published at the AAAI/ACM Conference on AI, Ethics, and Society (AIES) 2024."
@@ -51,3 +55,5 @@
             Unlike existing methods, PPS actively engages with users to gauge their comprehension of the agent behavior, subsequently generating tailored explanations on the fly. 
             Through a combination of numerical and human subject experiments, we confirmed the utility of this personalized approach to explainable AI."
   image: "assets/images/discover/facts/pps.png"
+  link: "https://ojs.aaai.org/index.php/AIES/article/view/31714"
+  link_text: "Read the paper"

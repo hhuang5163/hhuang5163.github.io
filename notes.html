@@ -1,0 +1,35 @@
+---
+layout: default
+title: Notes
+navbar_title: Notes
+---
+
+<div class="row">
+    <div class="col-12 col-lg-10">
+        <h1 class="pt-4 mb-3">Notes</h1>
+
+        {% if site.posts.size > 0 %}
+        {% assign notes_by_year = site.posts | group_by_exp: "item", "item.date | date: '%Y'" %}
+        {% for year in notes_by_year %}
+        <h2 class="pt-3" id="year-{{ year.name }}">{{ year.name }}</h2>
+        <div class="my-0 p-0 bg-white shadow-sm rounded-sm">
+            {% for post in year.items %}
+            <a href="{{ post.url | relative_url }}" class="d-block text-reset text-decoration-none">
+                <div class="p-3 {% unless forloop.last %}border-bottom border-gray{% endunless %} d-flex">
+                    <div>
+                        <div>{{ post.title }}</div>
+                        {% if post.excerpt and post.excerpt != empty %}
+                        <div class="small text-muted">{{ post.excerpt | strip_html | truncate: 140 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="ml-auto mt-auto text-muted no-break small"><i>{{ post.date | date: "%b %-d, %Y" }}</i></div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="text-muted">No notes yet &mdash; check back soon.</p>
+        {% endif %}
+    </div>
+</div>
