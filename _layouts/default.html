@@ -34,7 +34,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
+    <!-- ?v= changes on every build so browsers fetch fresh CSS/JS after a deploy -->
+    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}?v={{ site.time | date: '%s' }}">
     <script>
         // Set the theme before first paint to avoid a light/dark flash.
         (function() {
@@ -73,9 +74,9 @@
             });
         });
     </script>
-    <script src="{{ '/assets/js/common.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/bubble_visual_hash.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/konami.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/common.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    <script src="{{ '/assets/js/bubble_visual_hash.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    <script src="{{ '/assets/js/konami.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
     {% if site.goatcounter_code and site.goatcounter_code != "" %}
     <!-- Privacy-friendly analytics (goatcounter.com) -->
     <script data-goatcounter="https://{{ site.goatcounter_code }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
